@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blooming Flower</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #1a1a1a;
+      font-family: sans-serif;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      position: relative;
+    }
+
+    .flower {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      margin: 0 auto 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .center {
+      position: absolute;
+      width: 52px;
+      height: 52px;
+      background: #ffdb3b;
+      border-radius: 50%;
+      z-index: 10;
+      box-shadow: 0 0 25px rgba(255, 219, 59, 0.6);
+    }
+
+    .petal {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 70px;
+      height: 70px;
+      background: #ff4a75;
+      border-radius: 50% 50% 0 50%;
+      opacity: 0;
+      transform: translate(-50%, -50%) rotate(var(--rot)) scale(0) translateX(0);
+      transition: transform 2.6s ease, opacity 2.6s ease;
+      box-shadow: inset -8px -8px 0 rgba(255,255,255,0.08);
+    }
+
+    .p1 { --rot: 0deg; }
+    .p2 { --rot: 45deg; }
+    .p3 { --rot: 90deg; }
+    .p4 { --rot: 135deg; }
+    .p5 { --rot: 180deg; }
+    .p6 { --rot: 225deg; }
+    .p7 { --rot: 270deg; }
+    .p8 { --rot: 315deg; }
+
+    #bloom-trigger {
+      display: none;
+    }
+
+    #bloom-trigger:checked ~ .flower .petal {
+      opacity: 0.95;
+      transform: translate(-50%, -50%) rotate(var(--rot)) scale(1.2) translateX(72px);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #ff4a75;
+      color: white;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(255, 74, 117, 0.4);
+      user-select: none;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #ff2a5c;
+    }
+
+    #bloom-trigger:checked ~ .btn {
+      background: #4caf50;
+      box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <input type="checkbox" id="bloom-trigger" />
+
+    <div class="flower">
+      <div class="center"></div>
+      <div class="petal p1"></div>
+      <div class="petal p2"></div>
+      <div class="petal p3"></div>
+      <div class="petal p4"></div>
+      <div class="petal p5"></div>
+      <div class="petal p6"></div>
+      <div class="petal p7"></div>
+      <div class="petal p8"></div>
+    </div>
+
+    <label for="bloom-trigger" class="btn">Click to Bloom</label>
+  </div>
+
+  <script>
+    const toggle = document.getElementById("bloom-trigger");
+    const btn = document.querySelector(".btn");
+
+    toggle.addEventListener("change", () => {
+      btn.textContent = toggle.checked ? "Bloomed!" : "Click to Bloom";
+    });
+  </script>
+</body>
+</html>
